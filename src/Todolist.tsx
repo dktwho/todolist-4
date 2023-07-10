@@ -15,16 +15,16 @@ type PropsType = {
     changeFilter: (value: FilterValuesType) => void
     addTask: (title: string) => void
     changeCheckBoxStatus: (taskId: string, newIsDone: boolean) => void
-    filter: FilterValuesType
+
 }
 
 export function Todolist(props: PropsType) {
 
-    let [title, setTitle] = useState("")
-    let [error, setError] = useState<null | string>(null)
+    const [title, setTitle] = useState("")
+    const [error, setError] = useState<null | string>(null)
     const [buttonName, setButtonName] = useState('all')
 
-    const addTask = () => {
+    const addTaskHandler = () => {
         if (title === '') {
             setError('Title is required')
             return
@@ -40,7 +40,7 @@ export function Todolist(props: PropsType) {
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.charCode === 13) {
-            addTask();
+            addTaskHandler();
         }
     }
 
@@ -48,7 +48,6 @@ export function Todolist(props: PropsType) {
         props.changeFilter(value)
         setButtonName(value)
     }
-
 
     return <div>
         <h3>{props.title}</h3>
@@ -58,7 +57,7 @@ export function Todolist(props: PropsType) {
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}
             />
-            <button onClick={addTask}>+</button>
+            <button onClick={addTaskHandler}>+</button>
             {error ? <h2 className={styled.errorMessage}>Value is required</h2> : null}
         </div>
         <ul>
@@ -68,8 +67,8 @@ export function Todolist(props: PropsType) {
                     const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                         props.changeCheckBoxStatus(t.id, e.currentTarget.checked)
                     }
-                    return <li key={t.id}>
-                        <input type="checkbox" checked={t.isDone} onChange={onChangeStatusHandler}/>
+                    return <li key={t.id} className={t.isDone ? styled.isDone : ''}>
+                        <input  type="checkbox" checked={t.isDone} onChange={onChangeStatusHandler}/>
                         <span>{t.title}</span>
                         <button onClick={onClickHandler}>x</button>
                     </li>
