@@ -21,9 +21,7 @@ function App() {
     }
 
     function addTask(title: string) {
-        let task = {id: v1(), title: title, isDone: false};
-        let newTasks = [task, ...tasks];
-        setTasks(newTasks);
+        setTasks([ {id: v1(), title: title, isDone: false}, ...tasks,])
     }
 
     const changeCheckBoxStatus = (taskId: string, newIsDone: boolean) => {
