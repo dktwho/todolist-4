@@ -30,7 +30,6 @@ function App() {
         setTasks(tasks.map(el => el.id === taskId ? {...el, isDone: newIsDone} : el))
     }
 
-
     let [filter, setFilter] = useState<FilterValuesType>("all");
 
     let tasksForTodolist = tasks;
@@ -46,7 +45,6 @@ function App() {
         setFilter(value);
     }
 
-
     return (
         <div className="App">
             <Todolist title="What to learn"
@@ -55,9 +53,7 @@ function App() {
                       changeFilter={changeFilter}
                       addTask={addTask}
                       changeCheckBoxStatus={changeCheckBoxStatus}
-
             />
-
         </div>
     );
 }
